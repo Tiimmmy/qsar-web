@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <title>分类结果</title>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .metric { display: inline-block; margin: 10px; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        img { max-width: 100%; margin: 20px 0; }
+        table { border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #999; padding: 8px 12px; }
+    </style>
+</head>
+<body>
+    <h2>🎯 分类建模结果（高/低活性，阈值={{ "%.2f"|format(threshold) }}）</h2>
+    
+    <div class="metric">平衡准确率: {{ "%.3f"|format(bacc) }}</div>
+    <div class="metric">准确率: {{ "%.3f"|format(acc) }}</div>
+    <div class="metric">AUC: {{ "%.3f"|format(auc) }}</div>
+    <div class="metric">样本数: {{ n_samples }}</div>
+
+    <h3>🔍 关键描述符</h3>
+    <table>
+        <tr><th>描述符</th><th>权重</th></tr>
+        {% for f in features %}
+        <tr>
+            <td>{{ f.desc }}</td>
+            <td style="color: {% if f.weight > 0 %}green{% else %}red{% endif %}">
+                {{ "%.3f"|format(f.weight) }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>📊 特征权重</h3>
+    <img src="{{ weight_plot }}" alt="Weights">
+
+    <h3>📈 ROC 曲线</h3>
+    <img src="{{ roc_plot }}" alt="ROC">
+
+    <a href="/">← 返回</a>
+</body>
+</html>

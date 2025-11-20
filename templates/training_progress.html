@@ -1,0 +1,9 @@
+<!-- templates/training_progress.html -->
+<h3>⏳ 训练中...</h3>
+<div class="progress-bar">
+    <div class="progress-fill" id="progressFill" style="width: {{ percent }}%"></div>
+</div>
+<p>{{ message }}</p>
+
+<!-- 每 1 秒轮询一次进度 -->
+<div hx-get="/check_progress" hx-trigger="every 1s" hx-swap="outerHTML"></div>

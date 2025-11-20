@@ -1,0 +1,39 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>    
+    <meta charset="utf-8">
+    <title>QSAR Modeling</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .preview-table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        .preview-table th, .preview-table td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 20px;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <h2>🔬 QSAR 建模平台</h2>
+    <form id="uploadForm" hx-post="/upload" hx-target="#previewSection" enctype="multipart/form-data">
+        <label>选择 CSV 文件: <input type="file" name="file" accept=".csv" required></label><br><br>
+        <label>
+            <input type="radio" name="task_type" value="regression" checked> 回归
+            <input type="radio" name="task_type" value="classification"> 分类
+        </label><br><br>
+        <button type="submit">📤 上传并预览</button>
+    </form>
+
+    <div id="previewSection"></div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <title>回归结果</title>
+    <meta charset="utf-8">
+    <style> body { font-family: Arial; margin: 40px; } .metric { display: inline-block; margin: 10px; padding: 15px; border: 1px solid #ccc; border-radius: 5px; } </style>
+</head>
+<body>
+    <h2>📈 回归建模结果</h2>
+    <div class="metric">R²: {{ "%.3f"|format(r2) }}</div>
+    <div class="metric">MAE: {{ "%.3f"|format(mae) }}</div>
+    <div class="metric">RMSE: {{ "%.3f"|format(rmse) }}</div>
+    <div class="metric">样本数: {{ n_samples }}</div>
+
+    <h3>📊 预测 vs 真实值</h3>
+    <img src="{{ plot_url }}" alt="Regression Plot" style="max-width:600px;">
+
+    <a href="/">← 返回</a>
+</body>
+</html>

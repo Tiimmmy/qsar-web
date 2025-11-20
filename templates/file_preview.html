@@ -1,0 +1,42 @@
+<!-- templates/file_preview.html -->
+<h3>📊 文件预览（全部数据）</h3>
+<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; margin: 10px 0;">
+    <table class="preview-table" style="width:100%; border-collapse:collapse; font-size:14px;">
+        <thead style="position:sticky; top:0; background:#f5f5f5;">
+            <tr>
+                {% for col in columns %}
+                <th style="border:1px solid #ddd; padding:8px; text-align:left;">{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                {% for cell in row %}
+                <td style="border:1px solid #ddd; padding:6px; word-break:break-word;">
+                    {{ '' if cell is none else cell }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+
+<!-- 点击后显示 loading 文字，并等待后端返回结果 -->
+<button hx-post="/start_training"
+        hx-vals='{"filename": "{{ filename }}", "task": "{{ task }}"}'
+        hx-target="#result-container"
+        hx-indicator="#loading-msg">
+    🚀 开始训练模型
+</button>
+
+<!-- loading 提示（默认隐藏，请求时显示） -->
+<span id="loading-msg" class="htmx-indicator" style="margin-left: 10px; color: #555;">
+    训练中，请稍后...
+</span>
+
+<!-- 结果将替换这里 -->
+<div id="result-container"></div>
