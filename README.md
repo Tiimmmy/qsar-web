@@ -16,8 +16,8 @@
 ## 1. 克隆项目
 
  ```bash
-git clone https://github.com/yourname/qsar-web-app.git
-cd qsar-web-app
+git clone https://github.com/Tiimmmy/qsar-web.git
+cd qsar-web
  ```
 
 ## 2. 创建虚拟环境（推荐）
@@ -45,7 +45,7 @@ PyPI 上的 rdkit 包通常无法正常工作！
 ## 5. 准备目录结构
 确保项目根目录包含以下内容：
 ```text
-qsar-web-app/
+qsar-web/
 ├── app.py
 ├── requirements.txt
 ├── templates/
